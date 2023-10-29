@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package carService;
+option go_package = ".;carService";
+
+
+message Car {
+  int64  ID = 1;
+  string Name = 2;
+  string Price = 3;
+  string Description = 4;
+  string Brand = 5;
+  int64  UserID = 6;
+  int64  EngineID = 7;
+}
+
+message GetUserCarsReq {
+  string ID = 1;
+}
+
+message GetUserCarsByBrandReq {
+  string Brand = 1;
+}
+
+message GetUserCarsRes {
+ repeated Car Cars = 1;
+}
+
+message GetUserCarRes {
+  Car Car = 1;
+}
+  
+
+message Empty {}
+
+
+service GatewayService {
+  rpc GetUserCars(GetUserCarsReq) returns (GetUserCarsRes) {}
+  rpc GetUserCarsByBrand(GetUserCarsByBrandReq) returns (GetUserCarsRes) {}
+  rpc GetCar(GetUserCarsReq) return (GetUserCarRes) {}
+}
